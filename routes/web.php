@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LeaguesController;
+use App\Http\Controllers\ScoresController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Route::group(['middlaware' => 'auth'], function(){
+
+    Route::get('/', [LeaguesController::class , 'index'])->name('leagues.index');
+    Route::get('footballTeams/{id}', [ScoresController::class , 'index'])->name('footballTeams.index');
+
 });
