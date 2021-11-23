@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LeaguesController;
 use App\Http\Controllers\ScoresController;
+use App\Http\Controllers\TeamsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,8 +27,12 @@ Route::group(['middlaware' => 'auth'], function(){
     Route::get('delete/{id}', [LeaguesController::class , 'delete'])->name('leagues.delete');
     Route::get('create', [LeaguesController::class , 'create'])->name('leagues.create');
 
-    Route::get('footballTeams/{id}', [ScoresController::class , 'index'])->name('footballTeams.index');
-    Route::get('footballTeams/{id}/create', [ScoresController::class , 'create'])->name('footballTeams.create');
-    Route::post('footballTeams/{id}/store', [ScoresController::class , 'store'])->name('footballTeams.store');
+//    Route::get('footballTeams/{id}', [ScoresController::class , 'index'])->name('footballTeams.index');
+//    Route::get('footballTeams/{id}/create', [ScoresController::class , 'create'])->name('footballTeams.create');
+//    Route::post('footballTeams/{id}/store', [ScoresController::class , 'store'])->name('footballTeams.store');
+
+    Route::get('footballTeams/{id}', [TeamsController::class , 'index'])->name('footballTeams.index');
+    Route::get('footballTeams/{id}/create', [TeamsController::class , 'create'])->name('footballTeams.create');
+    Route::post('footballTeams/{id}/store', [TeamsController::class , 'store'])->name('footballTeams.store');
 
 });

@@ -9,13 +9,16 @@ class Scores extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['teamsId', 'leaguesId', 'point', 'winPoint', 'losePoint', 'draw', 'totalGoals'];
+
+
     public function teams()
     {
-        return $this->belongsTo(Teams::class,'teamsId', 'id');
+        return $this->belongsTo(Teams::class, 'teamsId', 'id');
     }
 
     public function leagues()
     {
-        return $this->belongsTo(Leagues::class,'leaguesId', 'id');
+        return $this->belongsTo(Leagues::class, 'leaguesId', 'id');
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class ScoresController extends Controller
 {
+    public $lastId;
     public function index($id)
     {
         $teams = Scores::with(['teams', 'leagues'])->where('leaguesId', $id)->get();
@@ -22,14 +23,26 @@ class ScoresController extends Controller
         return view('scores.create', compact('id'));
     }
 
-    public function store(Request $request, $id)
+    public function store(Request $request, $leaguesId)
     {
         Teams::create([
-            'leaguesId' => $id,
+            'leaguesId' => $leaguesId,
             'name' => $request->name
         ]);
 
+        $this->lastId = Teams::latest()->limit(1)->get();
 
-        return redirect()->route('footballTeams.index', $id)->withSuccess('League Başarı ile Oluşturuldu');
+        Scores::create([
+            'teamsId' => $this->lastId,
+            'leaguesId' => $leaguesId,
+            'point' => 0,
+            'winPoint' => 0,
+            'losePoint' => 0,
+            'draw' => 0,
+            'totalGoals' => 0
+        ]);
+
+
+        return redirect()->route('footballTeams.index', $leaguesId)->withSuccess('League Başarı ile Oluşturuldu');
     }
 }

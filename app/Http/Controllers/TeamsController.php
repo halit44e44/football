@@ -7,9 +7,33 @@ use Illuminate\Http\Request;
 
 class TeamsController extends Controller
 {
-//    public function index($id)
-//    {
-////        $teams = Teams::with(['leagues'])->where('leagueId', $id)->get();
-////        return view('teams')->with('teams', $teams);
-//    }
+    public function index($id)
+    {
+        $teams = Teams::with('leagues')->where('leaguesId', $id)->get();
+        return view('teams.index', [
+            'teams' => $teams,
+            'leaguesId' => $id
+        ]);
+    }
+
+    public function create($id)
+    {
+        return view('scores.create', compact('id'));
+    }
+
+    public function store(Request $request, $leaguesId)
+    {
+        $teams = Teams::all();
+        if ($teams->count() < 4) {
+            Teams::create([
+                'leaguesId' => $leaguesId,
+                'name' => $request->name
+            ]);
+        } else {
+            dd("Bir Ligde en fazla 4 takım oluşabilir.");
+        }
+
+
+        return redirect()->route('footballTeams.index', $leaguesId)->withSuccess('League Başarı ile Oluşturuldu');
+    }
 }
