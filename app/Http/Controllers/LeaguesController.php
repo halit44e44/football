@@ -22,14 +22,14 @@ class LeaguesController extends Controller
     public function store(Request $request)
     {
         Leagues::create($request->post());
-        return redirect()->route('leagues.index')->withSuccess('Quiz Başarı ile Oluşturuldu');
+        return redirect()->route('leagues.index')->withSuccess('League Başarı ile Oluşturuldu');
     }
 
     public function delete($id)
     {
         if (isset($id)) {
             Leagues::find($id)->delete();
-            return redirect()->route('leagues.index')->withSuccess('Quiz Başarılı Bir Şekilde Silindi');
+            return redirect()->route('leagues.index')->withSuccess('League Başarılı Bir Şekilde Silindi');
         }
     }
 }
