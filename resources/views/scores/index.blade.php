@@ -3,9 +3,6 @@
 @section('content')
     <div class="container">
         <h1 class="text-center">Welcome to League</h1>
-        <div class="row col-md-3">
-            <a href="{{ route('footballTeams.create',$leaguesId) }}" class="btn btn-primary">Yeni Takım Oluştur</a>
-        </div>
         <div class="row">
             <div class="col-md-12">
                 <table class="table">
@@ -23,19 +20,49 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($teams as $item)
+                    @foreach($scores as $item)
                         <tr>
                             <th scope="row">{{ $item->id}}</th>
                             <td>{{ $item->leagues->name }}</td>
                             <td>{{ $item->teams->name }}</td>
                             <td>{{ $item->point }}</td>
-                            <td>5</td>
+                            <td>{{ $item->pastMatch }}</td>
                             <td>{{ $item->winPoint }}</td>
                             <td>{{ $item->draw }}</td>
                             <td>{{ $item->losePoint }}</td>
                             <td>{{ $item->point }}</td>
                         </tr>
                     @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+                <a href="{{ route('scores.start',$leaguesId) }}" class="btn btn-success">Oyna</a>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-4">
+                <table class="table table-dark">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

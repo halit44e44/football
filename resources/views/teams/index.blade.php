@@ -3,8 +3,11 @@
 @section('content')
     <div class="container">
         <h1 class="text-center">Welcome to League</h1>
-        <div class="row col-md-3">
-            <a href="{{ route('footballTeams.create',$leaguesId) }}" class="btn btn-primary">Yeni Takım Oluştur</a>
+        <div class="row">
+            <div class="col-md-3">
+                <a href="{{ route('footballTeams.create',$leaguesId) }}"
+                   class="btn btn-primary {{ $teamsCount < 4 ? '' : 'disabled' }}">Yeni Takım Oluştur</a>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -26,6 +29,13 @@
                     @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+                <a href="{{ route('scores.index',$leaguesId) }}"
+                   class="btn btn-success {{ $teamsCount < 4 ? 'disabled' : '' }}">Sezonu Başlat</a>
             </div>
         </div>
 

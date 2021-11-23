@@ -27,7 +27,8 @@ Route::group(['middlaware' => 'auth'], function(){
     Route::get('delete/{id}', [LeaguesController::class , 'delete'])->name('leagues.delete');
     Route::get('create', [LeaguesController::class , 'create'])->name('leagues.create');
 
-//    Route::get('footballTeams/{id}', [ScoresController::class , 'index'])->name('footballTeams.index');
+    Route::get('scores/{id}', [ScoresController::class , 'index'])->name('scores.index');
+    Route::get('scores/{id}/game', [ScoresController::class , 'start'])->name('scores.start');
 //    Route::get('footballTeams/{id}/create', [ScoresController::class , 'create'])->name('footballTeams.create');
 //    Route::post('footballTeams/{id}/store', [ScoresController::class , 'store'])->name('footballTeams.store');
 

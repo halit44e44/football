@@ -11,6 +11,11 @@ class Teams extends Model
 
     protected $fillable = ['leaguesId', 'name'];
 
+    public function teams()
+    {
+        return $this->belongsTo(Teams::class, 'teamsId', 'id');
+    }
+
     public function leagues()
     {
         return $this->belongsTo(Leagues::class,'leaguesId', 'id');

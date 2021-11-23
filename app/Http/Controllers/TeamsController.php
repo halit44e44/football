@@ -12,7 +12,8 @@ class TeamsController extends Controller
         $teams = Teams::with('leagues')->where('leaguesId', $id)->get();
         return view('teams.index', [
             'teams' => $teams,
-            'leaguesId' => $id
+            'leaguesId' => $id,
+            'teamsCount' => $teams->count()
         ]);
     }
 
@@ -30,7 +31,7 @@ class TeamsController extends Controller
                 'name' => $request->name
             ]);
         } else {
-            dd("Bir Ligde en fazla 4 takım oluşabilir.");
+            dd("Error");
         }
 
 

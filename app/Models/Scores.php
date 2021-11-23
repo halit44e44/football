@@ -9,7 +9,7 @@ class Scores extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['teamsId', 'leaguesId', 'point', 'winPoint', 'losePoint', 'draw', 'totalGoals'];
+    protected $fillable = ['teamsId', 'leaguesId', 'pastMatch', 'point', 'winPoint', 'losePoint', 'draw', 'totalGoals'];
 
 
     public function teams()
