@@ -3,6 +3,9 @@
 @section('content')
     <div class="container">
         <h1 class="text-center">Welcome to League</h1>
+        <div class="col-md-12 d-flex justify-content-left">
+            <a href="{{ route('scores.start',$leaguesId) }}" class="btn btn-success">Takımları Eşle</a>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <table class="table">
@@ -38,35 +41,32 @@
             </div>
         </div>
         <hr>
-        <div class="row">
-            <div class="col-md-12 d-flex justify-content-center">
-                <a href="{{ route('scores.start',$leaguesId) }}" class="btn btn-success">Oyna</a>
+        @if(isset($match))
+            <div class="form">
+                <div class="row">
+                    <div class="col-md-4">
+                        <table class="table table-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First</th>
+                                <th scope="col">Last</th>
+                                <th scope="col">Handle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{ $match->teamsOwner->name }}</td>
+                                <td>{{ $match->teamsAway->name }}</td>
+                                <td>@mdo</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
-        <hr>
-
-        <div class="row">
-            <div class="col-md-4">
-                <table class="table table-dark">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        @endif
 
     </div>
 @endsection

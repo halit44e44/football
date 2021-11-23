@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FinishedMatches;
 use App\Models\Scores;
 use App\Models\Teams;
 
@@ -27,26 +28,36 @@ class ScoresController extends Controller
         }
         $scores = Scores::with(['teams', 'leagues'])->where('leaguesId', $id)->get();
 
+        $finishedMatches = FinishedMatches::with(['teamsAway', 'teamsOwner'])->where('leaguesId', $id)->where('score', '')->first();
+
         return view('scores.index', [
             'scores' => $scores,
-            'leaguesId' => $id
+            'leaguesId' => $id,
+            'match' => $finishedMatches
         ]);
     }
 
     public function start($id)
     {
         $scores = Scores::with(['teams', 'leagues'])->where('leaguesId', $id)->get();
-
-        for ($i = 0; $i < $scores->count(); $i++) {
-            for ($j = 0; $j < $scores->count(); $j++) {
-                echo "a<br>";
+        $finishedMatches = FinishedMatches::where('leaguesId', $id)->first();
+        if (empty($finishedMatches)) {
+            foreach ($scores as $team1) {
+                foreach ($scores as $team2) {
+                    if ($team1->teamsId !== $team2->teamsId) {
+                        FinishedMatches::create([
+                            'leaguesId' => $id,
+                            'houseOwner' => $team1->teams->id,
+                            'away' => $team2->teams->id,
+                            'score' => ''
+                        ]);
+                    }
+                }
             }
         }
+        return redirect()->back();
 
-        return view('scores.index', [
-            'scores' => $scores,
-            'leaguesId' => $id
-        ]);
+
     }
 
 }
