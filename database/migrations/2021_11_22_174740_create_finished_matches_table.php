@@ -18,7 +18,8 @@ class CreateFinishedMatchesTable extends Migration
             $table->unsignedBigInteger('leaguesId');
             $table->integer('houseOwner');
             $table->integer('away');
-            $table->string('score')->nullable();
+            $table->string('score1')->nullable();
+            $table->string('score2')->nullable();
             $table->timestamps();
 
 

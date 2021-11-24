@@ -4,7 +4,8 @@
     <div class="container">
         <h1 class="text-center">Welcome to League</h1>
         <div class="col-md-12 d-flex justify-content-left">
-            <a href="{{ route('scores.start',$leaguesId) }}" class="btn btn-success">Takımları Eşle</a>
+            <a href="{{ route('scores.start',$leaguesId) }}" class="btn btn-success {{ $match ? 'disabled' : '' }}">Takımları
+                Eşle</a>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -33,7 +34,7 @@
                             <td>{{ $item->winPoint }}</td>
                             <td>{{ $item->draw }}</td>
                             <td>{{ $item->losePoint }}</td>
-                            <td>{{ $item->point }}</td>
+                            <td>{{ $item->totalGoals }}</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -41,17 +42,18 @@
             </div>
         </div>
         <hr>
-        @if(isset($match))
+        @if($match)
             <div class="form">
-                <div class="row">
-                    <div class="col-md-4">
+                <h2 class="text-center">Maçları Oyna</h2>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-6">
                         <table class="table table-dark">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Ev Sahibi</th>
+                                <th scope="col">Deplasman</th>
+                                <th scope="col">SKOR</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -59,14 +61,53 @@
                                 <th scope="row">1</th>
                                 <td>{{ $match->teamsOwner->name }}</td>
                                 <td>{{ $match->teamsAway->name }}</td>
-                                <td>@mdo</td>
+                                <td>{{ isset($match->score) ? 'Oynanmadı' : $match->score1 . '-' . $match->score2 }}</td>
                             </tr>
                             </tbody>
                         </table>
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <a href="{{ route('scores.game',$match->id) }}" class="btn btn-success">Maçı Oyna</a>
+                        </div>
                     </div>
                 </div>
             </div>
+        @else
+            @if($alert)
+                <div class="alert alert-danger" role="alert">
+                    {{ $alert }}
+                </div>
+            @endif
         @endif
+        <hr>
+        <div class="form">
+            <h2 class="text-center">Geçmiş Maçlar</h2>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Ev Sahibi</th>
+                            <th scope="col">Deplasman</th>
+                            <th scope="col">Skor</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($oldMatch as $match)
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{ $match->teamsOwner->name }}</td>
+                                <td>{{ $match->teamsAway->name }}</td>
+                                <td>{{ $match->score1 }} - {{ $match->score2 }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     </div>
 @endsection

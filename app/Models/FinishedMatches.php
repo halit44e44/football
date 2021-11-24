@@ -9,7 +9,7 @@ class FinishedMatches extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['leaguesId', 'houseOwner', 'away', 'score'];
+    protected $fillable = ['leaguesId', 'houseOwner', 'away', 'score1', 'score2'];
 
     public function teamsAway()
     {
