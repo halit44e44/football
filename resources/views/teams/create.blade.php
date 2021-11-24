@@ -10,10 +10,10 @@
 
                 <div class="form-group mx-sm-3 mb-2">
                     <label for="name" class="sr-only">Takım Adı</label>
-                    <input type="text" class="form-control" name="name" placeholder="Takım Adı">
+                    <input type="text" class="form-control" name="name" placeholder="Takım Adı" required>
                 </div>
 
-                <x-button :name="'Takım Ekle'" :color="'danger'" />
+                <x-button :name="'Takım Ekle'" :color="'danger'"/>
             </form>
         </div>
 

@@ -19,7 +19,7 @@ class TeamsController extends Controller
 
     public function create($id)
     {
-        return view('scores.create', compact('id'));
+        return view('teams.create', compact('id'));
     }
 
     public function store(Request $request, $leaguesId)
