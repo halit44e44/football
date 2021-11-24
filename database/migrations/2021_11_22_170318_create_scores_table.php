@@ -17,6 +17,7 @@ class CreateScoresTable extends Migration
             $table->id();
             $table->unsignedBigInteger('teamsId');
             $table->unsignedBigInteger('leaguesId');
+            $table->string('pastMatch');
             $table->string('point');
             $table->string('winPoint');
             $table->string('losePoint');
