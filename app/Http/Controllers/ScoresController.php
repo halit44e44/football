@@ -26,15 +26,27 @@ class ScoresController extends Controller
                 ]);
             }
         }
-        $scores = Scores::with(['teams', 'leagues'])->where('leaguesId', $id)->orderByDesc('point')->orderByDesc('totalGoals')->get();
+        $scores = Scores::with(['teams', 'leagues'])
+            ->where('leaguesId', $id)
+            ->orderByDesc('point')
+            ->orderByDesc('totalGoals')
+            ->get();
         $alert = null;
         try {
-            $finishedMatches = FinishedMatches::with(['teamsAway', 'teamsOwner'])->where('leaguesId', $id)->where('score1', null)->get()->random(1);
+            $finishedMatches = FinishedMatches::with(['teamsAway', 'teamsOwner'])
+                ->where('leaguesId', $id)
+                ->where('score1', null)
+                ->get()
+                ->random(1);
         } catch (\Exception $exception) {
             $alert = "Şu anda oynanacak maç yoktur.";
             $finishedMatches[] = [];
         }
-        $oldMatches = FinishedMatches::with(['teamsAway', 'teamsOwner'])->where('leaguesId', $id)->whereNotNull('score1')->get();
+        $oldMatches = FinishedMatches::with(['teamsAway', 'teamsOwner'])
+            ->where('leaguesId', $id)
+            ->whereNotNull('score1')
+            ->orderByDesc('updated_at')
+            ->get();
 
         return view('scores.index', [
             'scores' => $scores,
