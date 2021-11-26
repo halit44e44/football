@@ -28,7 +28,7 @@ class LeaguesController extends Controller
     public function delete($id)
     {
         if (isset($id)) {
-            Leagues::find($id)->delete();
+            Leagues::findOrFail($id)->delete();
             return redirect()->route('leagues.index')->withSuccess('League Başarılı Bir Şekilde Silindi');
         }
     }
