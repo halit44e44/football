@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FinishedMatches;
 use App\Models\Leagues;
 use Illuminate\Http\Request;
 
@@ -27,9 +28,15 @@ class LeaguesController extends Controller
 
     public function delete($id)
     {
-        if (isset($id)) {
-            Leagues::find($id)->delete();
-            return redirect()->route('leagues.index')->withSuccess('League Başarılı Bir Şekilde Silindi');
+        //softdelete eklenecek. sorunu çözmek için
+        try {
+            if (isset($id)) {
+                Leagues::findOrFail($id)->delete();
+                return redirect()->route('leagues.index')->withSuccess('League Başarılı Bir Şekilde Silindi');
+            }
+        } catch (\Exception $e) {
+            return "Bu maçı silemezsin.";
         }
+
     }
 }
