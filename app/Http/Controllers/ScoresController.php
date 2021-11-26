@@ -26,7 +26,7 @@ class ScoresController extends Controller
                 ]);
             }
         }
-        $scores = Scores::with(['teams', 'leagues'])->where('leaguesId', $id)->get();
+        $scores = Scores::with(['teams', 'leagues'])->where('leaguesId', $id)->orderByDesc('point')->orderByDesc('totalGoals')->get();
         $alert = null;
         try {
             $finishedMatches = FinishedMatches::with(['teamsAway', 'teamsOwner'])->where('leaguesId', $id)->where('score1', null)->get()->random(1);

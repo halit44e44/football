@@ -24,7 +24,7 @@ class TeamsController extends Controller
 
     public function store(Request $request, $leaguesId)
     {
-        $teams = Teams::all();
+        $teams = Teams::where('leaguesId' , $leaguesId)->get();
         if ($teams->count() < 4) {
             Teams::create([
                 'leaguesId' => $leaguesId,
