@@ -24,9 +24,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($scores as $item)
+                    @foreach($scores as $index => $item)
                         <tr>
-                            <th scope="row">{{ $item->id}}</th>
+                            <th scope="row">{{ $index +1 }}</th>
                             <td>{{ $item->leagues->name }}</td>
                             <td>{{ $item->teams->name }}</td>
                             <td>{{ $item->point }}</td>
@@ -47,7 +47,7 @@
                 <h2 class="text-center">Maçları Oyna</h2>
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6">
-                        <table class="table table-dark">
+                        <table class="table table-primary">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -58,7 +58,7 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row">+</th>
                                 <td>{{ $match->teamsOwner->name }}</td>
                                 <td>{{ $match->teamsAway->name }}</td>
                                 <td>{{ isset($match->score) ? 'Oynanmadı' : $match->score1 . '-' . $match->score2 }}</td>
@@ -93,9 +93,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($oldMatch as $match)
+                        @foreach($oldMatch as $index => $match)
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row">{{ $index +1 }}</th>
                                 <td>{{ $match->teamsOwner->name }}</td>
                                 <td>{{ $match->teamsAway->name }}</td>
                                 <td>{{ $match->score1 }} - {{ $match->score2 }}</td>
